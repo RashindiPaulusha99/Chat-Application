@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="795.0" prefWidth="642.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginFormController">
+   <children>
+      <Label alignment="CENTER" layoutX="251.0" layoutY="60.0" text="LOGIN">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <JFXTextField labelFloat="true" layoutX="89.0" layoutY="170.0" prefHeight="43.0" prefWidth="474.0" promptText="Username" />
+      <JFXPasswordField labelFloat="true" layoutX="90.0" layoutY="265.0" prefHeight="43.0" prefWidth="474.0" promptText="Password" />
+      <JFXCheckBox checkedColor="#c91377" layoutX="89.0" layoutY="368.0" text="Remember me ?">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXButton buttonType="RAISED" layoutX="417.0" layoutY="363.0" ripplerFill="#e43193" text="Forgot Password ?" textFill="#836b6b">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="188.0" layoutY="438.0" prefHeight="43.0" prefWidth="269.0" style="-fx-background-color: pink; -fx-background-radius: 30px;" text="LOGIN">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Separator prefWidth="200.0" />
+      <Separator layoutX="88.0" layoutY="533.0" prefHeight="3.0" prefWidth="212.0" />
+      <Separator layoutX="352.0" layoutY="532.0" prefHeight="3.0" prefWidth="212.0" />
+      <Label layoutX="314.0" layoutY="520.0" text="OR" textFill="#a89797">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="90.0" layoutY="230.0" prefHeight="21.0" prefWidth="474.0" textFill="#e11717" />
+      <Label layoutX="90.0" layoutY="323.0" prefHeight="21.0" prefWidth="474.0" textFill="#e11717" />
+      <ImageView fitHeight="77.0" fitWidth="80.0" layoutX="148.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
