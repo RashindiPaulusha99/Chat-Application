@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="815.0" prefWidth="642.0" style="-fx-background-color: #f8a5c2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ChatFormController">
+
+<AnchorPane prefHeight="815.0" prefWidth="642.0" style="-fx-background-color: #f8a5c2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ServerFormController">
    <children>
       <AnchorPane prefHeight="76.0" prefWidth="642.0" style="-fx-background-color: #fd79a8;">
          <children>
@@ -18,15 +19,16 @@
                   <Font name="Britannic Bold" size="32.0" />
                </font>
             </Label>
-            <ImageView fitHeight="51.0" fitWidth="50.0" layoutX="23.0" layoutY="11.0" pickOnBounds="true">
+            <ImageView fitHeight="76.0" fitWidth="85.0" layoutX="1.0" layoutY="-2.0" pickOnBounds="true">
                <image>
-                  <Image url="@../assets/logo/icons8-game-64.png" />
+                  <Image url="@../assets/image/love-game-logo-vector-34017395-removebg-preview.png" />
                </image>
             </ImageView>
-         </children></AnchorPane>
-      <AnchorPane layoutY="727.0" prefHeight="84.0" prefWidth="642.0" style="-fx-background-color: #fd79a8; -fx-background-radius: 50px;">
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="10.0" layoutY="722.0" prefHeight="84.0" prefWidth="624.0" style="-fx-background-color: #fd79a8; -fx-background-radius: 50px;">
          <children>
-            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="587.0" layoutY="27.0" pickOnBounds="true">
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="579.0" layoutY="27.0" pickOnBounds="true">
                <image>
                   <Image url="@../assets/logo/icons8-email-send-32.png" />
                </image>
@@ -34,7 +36,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <TextField layoutX="23.0" layoutY="17.0" prefHeight="51.0" prefWidth="443.0" style="-fx-background-radius: 30px; -fx-background-color: white;" />
+            <TextField layoutX="17.0" layoutY="17.0" prefHeight="51.0" prefWidth="443.0" style="-fx-background-radius: 30px; -fx-background-color: white;" />
             <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="526.0" layoutY="28.0" pickOnBounds="true">
                <image>
                   <Image url="@../assets/logo/icons8-camera-48.png" />
@@ -51,7 +53,9 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-         </children></AnchorPane>
-      <TextArea layoutX="22.0" layoutY="114.0" prefHeight="573.0" prefWidth="598.0" style="-fx-background-radius: 30px;" />
+         </children>
+      </AnchorPane>
+      <TextArea layoutX="9.0" layoutY="83.0" prefHeight="628.0" prefWidth="624.0" style="-fx-background-color: white;" />
+      <AnchorPane layoutX="9.0" layoutY="511.0" prefHeight="200.0" prefWidth="624.0" style="-fx-background-color: yellow;" />
    </children>
 </AnchorPane>

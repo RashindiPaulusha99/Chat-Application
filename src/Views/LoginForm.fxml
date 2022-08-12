@@ -42,6 +42,9 @@
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="188.0" layoutY="455.0" onAction="#loginOnAction" prefHeight="43.0" prefWidth="269.0" style="-fx-background-color: pink; -fx-background-radius: 30px;" text="LOGIN">
          <font>
@@ -68,21 +71,33 @@
          <image>
             <Image url="@../assets/logo/icons8-google-48.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="37.0" fitWidth="38.0" layoutX="259.0" layoutY="611.0" pickOnBounds="true">
          <image>
             <Image url="@../assets/logo/icons8-facebook-48.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="37.0" fitWidth="38.0" layoutX="348.0" layoutY="611.0" pickOnBounds="true">
          <image>
             <Image url="@../assets/logo/icons8-twitter-48.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="37.0" fitWidth="38.0" layoutX="432.0" layoutY="609.0" pickOnBounds="true">
          <image>
             <Image url="@../assets/logo/icons8-gmail-48.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <Label layoutX="263.0" layoutY="676.0" text="Not a member ?" textFill="#8d6b6b">
          <font>

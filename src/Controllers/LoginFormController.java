@@ -19,14 +19,14 @@ public class LoginFormController {
     public Label lblPasswordError;
 
     public void forgotPasswordOnAction(ActionEvent event) {
-
+        System.out.println("dfd");
     }
 
     public void loginOnAction(ActionEvent event) {
-
+        System.out.println("dfd");
     }
 
     public void signupOnAction(ActionEvent event) {
-
+        System.out.println("dfd");
     }
 }

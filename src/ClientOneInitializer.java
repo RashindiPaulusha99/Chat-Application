@@ -4,9 +4,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class ClientOneInitializer extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("ClientOneForm.xml"))));
+        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Views/LoginForm.fxml"))));
         primaryStage.show();
     }
 }
