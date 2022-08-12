@@ -12,7 +12,7 @@ public class DbConnection {
     private DbConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/ThogaKade",
+                "jdbc:mysql://localhost:3306/Socket",
                 "root",
                 "1234");
     }

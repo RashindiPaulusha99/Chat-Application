@@ -4,8 +4,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LoginFormController {
 
@@ -18,15 +23,17 @@ public class LoginFormController {
     public Label lblUsernameError;
     public Label lblPasswordError;
 
-    public void forgotPasswordOnAction(ActionEvent event) {
-        System.out.println("dfd");
+    public void forgotPasswordOnAction(ActionEvent event) throws IOException {
+        Stage window = (Stage) loginContext.getScene().getWindow();
+        window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/ForgotPasswordForm.fxml"))));
     }
 
     public void loginOnAction(ActionEvent event) {
         System.out.println("dfd");
     }
 
-    public void signupOnAction(ActionEvent event) {
-        System.out.println("dfd");
+    public void signupOnAction(ActionEvent event) throws IOException {
+        Stage window = (Stage) loginContext.getScene().getWindow();
+        window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/RegisterForm.fxml"))));
     }
 }
