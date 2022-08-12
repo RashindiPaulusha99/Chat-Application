@@ -99,4 +99,18 @@ public class RegisterServices implements RegisterService {
             return null;
         }
     }
+
+    @Override
+    public boolean ifSearch(String username) throws SQLException, ClassNotFoundException {
+        PreparedStatement stm = DbConnection.getInstance().getConnection().prepareStatement("SELECT * FROM Users WHERE username='"+username+"'");
+        ResultSet rst = stm.executeQuery();
+        return rst.next();
+    }
+
+    @Override
+    public boolean searchForLogin(String username, String password) throws SQLException, ClassNotFoundException {
+        PreparedStatement stm = DbConnection.getInstance().getConnection().prepareStatement("SELECT * FROM Users WHERE username='"+username+"' AND password='"+password+"'");
+        ResultSet rst = stm.executeQuery();
+        return rst.next();
+    }
 }

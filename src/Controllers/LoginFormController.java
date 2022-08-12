@@ -6,11 +6,13 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginFormController {
 
@@ -28,8 +30,20 @@ public class LoginFormController {
         window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/ForgotPasswordForm.fxml"))));
     }
 
-    public void loginOnAction(ActionEvent event) {
-        System.out.println("dfd");
+    public void loginOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
+        if (txtPassword.getText().equals("") || txtUsername.getText().equals("")){
+            new Alert(Alert.AlertType.WARNING, "All fields are required.!").showAndWait();
+        }else {
+            if (txtUsername.getText().equalsIgnoreCase("admin") && txtPassword.getText().equalsIgnoreCase("1234")) {
+                Stage window = (Stage) loginContext.getScene().getWindow();
+                window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/ServerForm.fxml"))));
+            }else if (new RegisterServices().searchForLogin(txtUsername.getText(),txtPassword.getText())){
+                Stage window = (Stage) loginContext.getScene().getWindow();
+                window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/ClientOneForm.fxml"))));
+            }else {
+                new Alert(Alert.AlertType.WARNING, "Check your username and password whether correct.!").showAndWait();
+            }
+        }
     }
 
     public void signupOnAction(ActionEvent event) throws IOException {

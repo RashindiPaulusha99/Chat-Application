@@ -47,6 +47,8 @@ public class RegisterFormController {
 
                     Stage window = (Stage) registerContext.getScene().getWindow();
                     window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/LoginForm.fxml"))));
+                }else {
+                    new Alert(Alert.AlertType.WARNING, "Try again.!").showAndWait();
                 }
             }else {
                 new Alert(Alert.AlertType.WARNING, "Please agree to the teams and policy.!").showAndWait();

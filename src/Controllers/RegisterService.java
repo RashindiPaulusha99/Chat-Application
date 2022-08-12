@@ -13,4 +13,6 @@ public interface RegisterService {
     ArrayList<Users> getAllUsers();
     String generateUserIds() throws SQLException, ClassNotFoundException;
     Users searchByUserName(String username) throws SQLException, ClassNotFoundException;
+    boolean ifSearch(String username) throws SQLException, ClassNotFoundException;
+    boolean searchForLogin(String username, String password) throws SQLException, ClassNotFoundException;
 }

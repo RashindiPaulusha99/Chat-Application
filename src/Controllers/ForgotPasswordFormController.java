@@ -31,20 +31,20 @@ public class ForgotPasswordFormController {
         if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")) {
             new Alert(Alert.AlertType.WARNING, "All fields are required.!").showAndWait();
         } else {
-
-            Users users1 = new RegisterServices().searchByUserName(txtUsername.getText());
-
-            Users users = new Users(
-                    users1.getUserId(),
-                    txtUsername.getText(),
-                    txtPassword.getText(),
-                    txtConfirmPassword.getText()
-            );
-
-            if (users1.getUserName().equalsIgnoreCase(txtUsername.getText())){
+            if (new RegisterServices().ifSearch(txtUsername.getText())){
                 if (txtPassword.getText().equals(txtConfirmPassword.getText())){
+
+                    Users users1 = new RegisterServices().searchByUserName(txtUsername.getText());
+
+                    Users users = new Users(
+                            users1.getUserId(),
+                            txtUsername.getText(),
+                            txtPassword.getText(),
+                            txtConfirmPassword.getText()
+                    );
+
                     if (new RegisterServices().updateUsers(users)){
-                        new Alert(Alert.AlertType.CONFIRMATION, "Reset your password.!").showAndWait();
+                        new Alert(Alert.AlertType.CONFIRMATION, "Successfully reset your password.!").showAndWait();
 
                         txtUsername.clear();
                         txtPassword.clear();
@@ -52,7 +52,9 @@ public class ForgotPasswordFormController {
 
                         Stage window = (Stage) resetPWContext.getScene().getWindow();
                         window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/LoginForm.fxml"))));
-                    }else if (users1.getUserName().equalsIgnoreCase(txtUsername.getText()))
+                    }else {
+                        new Alert(Alert.AlertType.WARNING, "Try again.!").showAndWait();
+                    }
                 }else {
                     new Alert(Alert.AlertType.WARNING, "Check your password.!").showAndWait();
                 }
