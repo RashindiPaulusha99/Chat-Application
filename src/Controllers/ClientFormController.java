@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -27,7 +28,9 @@ public class ClientFormController {
     public ImageView imgProfile;
     public ComboBox cmbInfo;
 
-    Socket socket = null;
+    BufferedReader reader;
+    PrintWriter writer;
+    Socket socket;
 
     public void initialize() throws IOException {
 
@@ -49,7 +52,9 @@ public class ClientFormController {
             }
         });
 
-        new Thread(()->{
+        //connectSocket();
+
+        /*new Thread(()->{
 
             try {
                 socket = new Socket("localhost",5000);
@@ -62,13 +67,60 @@ public class ClientFormController {
                 e.printStackTrace();
             }
 
-        }).start();
+        }).start();*/
     }
 
+    /*public void run() {
+        try {
+            while (true) {
+                String msg = reader.readLine();
+                String[] tokens = msg.split(" ");
+                String cmd = tokens[0];
+                System.out.println(cmd);
+                StringBuilder fulmsg = new StringBuilder();
+                for(int i = 1; i < tokens.length; i++) {
+                    fulmsg.append(tokens[i]);
+                }
+                System.out.println(fulmsg);
+                if (cmd.equalsIgnoreCase(Controller.username + ":")) {
+                    continue;
+                } else if(fulmsg.toString().equalsIgnoreCase("bye")) {
+                    break;
+                }
+                txtChatArea.appendText(msg + "\n");
+            }
+            reader.close();
+            writer.close();
+            socket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
+
+   /* public void connectSocket() {
+        try {
+            socket = new Socket("localhost", 8889);
+            System.out.println("Socket is connected with server!");
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            writer = new PrintWriter(socket.getOutputStream(), true);
+            this.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
     public void sendOnAction(ActionEvent event) throws IOException {
-        PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
+        /*PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
         printWriter.println(txtType.getText());
-        printWriter.flush();
+        printWriter.flush();*/
+        /*String msg = txtType.getText();
+        writer.println(Controller.username + ": " + msg);
+        txtChatArea.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+        txtChatArea.appendText("Me: " + msg + "\n");
+        txtType.setText("");
+        if(msg.equalsIgnoreCase("BYE") || (msg.equalsIgnoreCase("logout"))) {
+            System.exit(0);
+        }*/
     }
 
     public void stickerOnAction(ActionEvent event) {
