@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -22,8 +21,7 @@ public class LoginFormController {
     public JFXButton btnForgotPassword;
     public JFXButton btnLogin;
     public JFXButton btnSignup;
-    public Label lblUsernameError;
-    public Label lblPasswordError;
+    public Label lblError;
 
     public void forgotPasswordOnAction(ActionEvent event) throws IOException {
         Stage window = (Stage) loginContext.getScene().getWindow();
@@ -31,17 +29,17 @@ public class LoginFormController {
     }
 
     public void loginOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
+
         if (txtPassword.getText().equals("") || txtUsername.getText().equals("")){
-            new Alert(Alert.AlertType.WARNING, "All fields are required.!").showAndWait();
+            lblError.setText("All fields are required.!");
+            lblError.setStyle("-fx-text-fill: red");
         }else {
-            if (txtUsername.getText().equalsIgnoreCase("admin") && txtPassword.getText().equalsIgnoreCase("1234")) {
+            if (new RegisterServices().searchForLogin(txtUsername.getText(),txtPassword.getText())){
                 Stage window = (Stage) loginContext.getScene().getWindow();
-                window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/ServerForm.fxml"))));
-            }else if (new RegisterServices().searchForLogin(txtUsername.getText(),txtPassword.getText())){
-                Stage window = (Stage) loginContext.getScene().getWindow();
-                window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/ClientOneForm.fxml"))));
+                window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/ClientForm.fxml"))));
             }else {
-                new Alert(Alert.AlertType.WARNING, "Check your username and password whether correct.!").showAndWait();
+                lblError.setText("Check your username and password whether correct.!");
+                lblError.setStyle("-fx-text-fill: red");
             }
         }
     }

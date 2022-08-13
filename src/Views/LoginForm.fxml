@@ -29,7 +29,7 @@
          <font>
             <Font size="17.0" />
          </font></JFXTextField>
-      <JFXPasswordField fx:id="txtPassword" focusColor="#960670" labelFloat="true" layoutX="90.0" layoutY="282.0" prefHeight="43.0" prefWidth="474.0" promptText="Password">
+      <JFXPasswordField fx:id="txtPassword" focusColor="#960670" labelFloat="true" layoutX="90.0" layoutY="270.0" prefHeight="43.0" prefWidth="474.0" promptText="Password">
          <font>
             <Font size="17.0" />
          </font></JFXPasswordField>
@@ -65,8 +65,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblUsernameError" layoutX="90.0" layoutY="247.0" prefHeight="21.0" prefWidth="474.0" textFill="#e11717" />
-      <Label fx:id="lblPasswordError" layoutX="90.0" layoutY="340.0" prefHeight="21.0" prefWidth="474.0" textFill="#e11717" />
+      <Label fx:id="lblError" layoutX="90.0" layoutY="331.0" prefHeight="21.0" prefWidth="474.0" textFill="#e11717" />
       <ImageView fitHeight="37.0" fitWidth="38.0" layoutX="169.0" layoutY="611.0" pickOnBounds="true">
          <image>
             <Image url="@../assets/logo/icons8-google-48.png" />

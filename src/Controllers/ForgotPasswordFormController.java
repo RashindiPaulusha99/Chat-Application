@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -20,16 +19,15 @@ public class ForgotPasswordFormController {
     public JFXTextField txtUsername;
     public JFXPasswordField txtPassword;
     public JFXPasswordField txtConfirmPassword;
-    public Label lblUserNameError;
-    public Label lblPasswordError;
-    public Label lblConfirmPasswordError;
     public JFXButton btnReset;
     public JFXButton btnBack;
+    public Label lblError;
 
     public void resetOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
 
         if (txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtConfirmPassword.getText().equals("")) {
-            new Alert(Alert.AlertType.WARNING, "All fields are required.!").showAndWait();
+            lblError.setText("All fields are required.!");
+            lblError.setStyle("-fx-text-fill: red");
         } else {
             if (new RegisterServices().ifSearch(txtUsername.getText())){
                 if (txtPassword.getText().equals(txtConfirmPassword.getText())){
@@ -44,22 +42,23 @@ public class ForgotPasswordFormController {
                     );
 
                     if (new RegisterServices().updateUsers(users)){
-                        new Alert(Alert.AlertType.CONFIRMATION, "Successfully reset your password.!").showAndWait();
+                        lblError.setText("Successfully reset your password.!");
+                        lblError.setStyle("-fx-text-fill: red");
 
                         txtUsername.clear();
                         txtPassword.clear();
                         txtConfirmPassword.clear();
-
-                        Stage window = (Stage) resetPWContext.getScene().getWindow();
-                        window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/LoginForm.fxml"))));
                     }else {
-                        new Alert(Alert.AlertType.WARNING, "Try again.!").showAndWait();
+                        lblError.setText("Try again.!");
+                        lblError.setStyle("-fx-text-fill: red");
                     }
                 }else {
-                    new Alert(Alert.AlertType.WARNING, "Check your password.!").showAndWait();
+                    lblError.setText("Check your password.!");
+                    lblError.setStyle("-fx-text-fill: red");
                 }
             }else {
-                new Alert(Alert.AlertType.WARNING, "Check username whether correct.!").showAndWait();
+                lblError.setText("Check username whether correct.!");
+                lblError.setStyle("-fx-text-fill: red");
             }
         }
     }

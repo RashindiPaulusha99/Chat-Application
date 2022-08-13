@@ -8,7 +8,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -24,6 +23,7 @@ public class RegisterFormController {
     public JFXButton btnSignUp;
     public JFXButton btnLogin;
     public JFXCheckBox checkBox;
+    public Label lblSuccess;
 
     public void signUpOnAction(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
 
@@ -35,23 +35,24 @@ public class RegisterFormController {
         );
 
         if (txtName.getText().equals("") || txtPassword.getText().equals("") || txtUsername.getText().equals("")) {
-            new Alert(Alert.AlertType.WARNING, "All fields are required.!").showAndWait();
+            lblSuccess.setText("All fields are required.!");
+            lblSuccess.setStyle("-fx-text-fill: red");
         } else {
             if (checkBox.isSelected()){
                 if (new RegisterServices().saveUsers(users)){
-                    new Alert(Alert.AlertType.CONFIRMATION, "Successfully Registered.!").showAndWait();
+                    lblSuccess.setText("Successfully Registered.! Now you can log !");
 
                     txtUsername.clear();
                     txtPassword.clear();
                     txtName.clear();
 
-                    Stage window = (Stage) registerContext.getScene().getWindow();
-                    window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/LoginForm.fxml"))));
                 }else {
-                    new Alert(Alert.AlertType.WARNING, "Try again.!").showAndWait();
+                    lblSuccess.setText("Try again.!");
+                    lblSuccess.setStyle("-fx-text-fill: red");
                 }
             }else {
-                new Alert(Alert.AlertType.WARNING, "Please agree to the teams and policy.!").showAndWait();
+                lblSuccess.setText("Please agree to the teams and policy.!");
+                lblSuccess.setStyle("-fx-text-fill: red");
             }
         }
     }
