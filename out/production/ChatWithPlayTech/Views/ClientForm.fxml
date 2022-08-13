@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -12,16 +12,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="clientContext" prefHeight="815.0" prefWidth="642.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ClientFormController">
+<AnchorPane fx:id="clientContext" prefHeight="815.0" prefWidth="510.0" style="-fx-background-color: linear-gradient(to right, #B33771, #FC427B);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ClientFormController">
    <children>
-      <AnchorPane prefHeight="76.0" prefWidth="642.0" style="-fx-background-color: #fd79a8;">
+      <AnchorPane layoutY="6.0" prefHeight="76.0" prefWidth="642.0" style="-fx-background-color: #353b48; -fx-background-radius: 50px;">
          <children>
-            <Label fx:id="lblName" layoutX="86.0" layoutY="17.0" prefHeight="40.0" prefWidth="231.0">
+            <Label fx:id="lblName" layoutX="86.0" layoutY="20.0" prefHeight="40.0" prefWidth="231.0" textFill="WHITE">
                <font>
                   <Font name="Britannic Bold" size="32.0" />
                </font>
             </Label>
-            <ImageView fx:id="imgProfile" fitHeight="76.0" fitWidth="77.0" layoutY="-1.0" pickOnBounds="true">
+            <ImageView fx:id="imgProfile" fitHeight="76.0" fitWidth="77.0" layoutX="5.0" pickOnBounds="true">
                <image>
                   <Image url="@../assets/logo/icons8-male-user-48.png" />
                </image>
@@ -31,10 +31,10 @@
                   <Image url="@../assets/logo/icons8-menu-vertical-50.png" />
                </image>
             </ImageView>
-            <ComboBox fx:id="cmbInfo" layoutX="554.0" layoutY="23.0" opacity="0.0" prefHeight="31.0" prefWidth="61.0" style="-fx-background-color: transparent;" />
+            <ComboBox fx:id="cmbInfo" layoutX="555.0" layoutY="23.0" opacity="0.0" prefHeight="31.0" prefWidth="61.0" style="-fx-background-color: transparent;" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="3.0" layoutY="734.0" prefHeight="76.0" prefWidth="635.0" style="-fx-background-color: #fd79a8; -fx-background-radius: 50px;">
+      <AnchorPane layoutX="3.0" layoutY="734.0" prefHeight="76.0" prefWidth="635.0" style="-fx-background-color: #353b48; -fx-background-radius: 50px;">
          <children>
             <TextField fx:id="txtType" layoutX="129.0" layoutY="14.0" prefHeight="51.0" prefWidth="424.0" promptText="Write messages here ..." style="-fx-background-radius: 30px; -fx-background-color: white;">
                <font>
@@ -81,7 +81,10 @@
             </Button>
          </children>
       </AnchorPane>
-      <TextArea fx:id="txtChatArea" layoutX="6.0" layoutY="76.0" prefHeight="652.0" prefWidth="628.0" style="-fx-background-color: white;" />
-      <Separator layoutY="74.0" prefHeight="0.0" prefWidth="642.0" style="-fx-background-color: black;" />
+      <TextArea fx:id="txtChatArea" layoutY="88.0" prefHeight="638.0" prefWidth="642.0" style="-fx-background-radius: 50px;" stylesheets="@../style/styles.css">
+         <styleClass>
+            <String fx:value="content" />
+            <String fx:value="text-area" />
+         </styleClass></TextArea>
    </children>
 </AnchorPane>

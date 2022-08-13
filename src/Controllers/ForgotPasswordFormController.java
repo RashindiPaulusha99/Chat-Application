@@ -38,7 +38,7 @@ public class ForgotPasswordFormController {
                             users1.getUserId(),
                             txtUsername.getText(),
                             txtPassword.getText(),
-                            txtConfirmPassword.getText()
+                            users1.getName()
                     );
 
                     if (new RegisterServices().updateUsers(users)){

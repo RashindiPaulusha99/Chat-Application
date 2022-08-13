@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class ClientFormController {
     public AnchorPane clientContext;
@@ -26,11 +28,16 @@ public class ClientFormController {
     public Button btnCamera;
     public Button btnEmoji;
     public ImageView imgProfile;
-    public ComboBox cmbInfo;
+    public ComboBox<String> cmbInfo;
 
     BufferedReader reader;
     PrintWriter writer;
     Socket socket;
+
+   public void setData(String name) throws SQLException, ClassNotFoundException {
+       Users users = new RegisterServices().searchByUserName(name);
+       lblName.setText(users.getName());
+   }
 
     public void initialize() throws IOException {
 
