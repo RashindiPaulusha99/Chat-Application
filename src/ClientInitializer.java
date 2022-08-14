@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 public class ClientInitializer extends Application {
 
     public static void main(String[] args) {
@@ -12,6 +13,7 @@ public class ClientInitializer extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Views/LoginForm.fxml"))));
+        primaryStage.setTitle("Play Tech Chat");
         primaryStage.show();
     }
 }

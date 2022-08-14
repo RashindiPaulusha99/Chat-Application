@@ -1,6 +1,5 @@
 package Controllers;
 
-import Models.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,10 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.net.URL;
 import java.sql.SQLException;
@@ -35,9 +31,12 @@ public class ClientFormController extends Thread implements Initializable {
     PrintWriter writer;
     Socket socket=null;
 
-   public void setData(String name) throws SQLException, ClassNotFoundException {
-       Users users = new RegisterServices().searchByUserName(name);
-       lblName.setText(users.getName());
+    ObjectOutputStream oos = null;
+    ObjectInputStream ois = null;
+    java.util.Date date = null;
+
+   public void setData(String name) {
+       lblName.setText(name);
    }
 
    @Override
@@ -70,6 +69,7 @@ public class ClientFormController extends Thread implements Initializable {
            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
            writer = new PrintWriter(socket.getOutputStream(), true);
            this.start();
+
        } catch (IOException e) {
            e.printStackTrace();
        }
@@ -90,7 +90,7 @@ public class ClientFormController extends Thread implements Initializable {
                 System.out.println(fulmsg);
                 if (cmd.equalsIgnoreCase(lblName.getText() + ":")) {
                     continue;
-                }else if(fulmsg.toString().equalsIgnoreCase("Logout")) {
+                }else if(fulmsg.toString().equalsIgnoreCase("Bye")) {
                     break;
                 }
                 txtChatArea.appendText(msg + "\n\n");
@@ -109,7 +109,7 @@ public class ClientFormController extends Thread implements Initializable {
         txtChatArea.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
         txtChatArea.appendText("Me: " + msg + "\n\n");
         txtType.setText("");
-        if(msg.equalsIgnoreCase("logout")) {
+        if(msg.equalsIgnoreCase("Bye")) {
             System.exit(0);
         }
     }
