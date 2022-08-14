@@ -1,17 +1,33 @@
+import Controllers.ClientController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class ServerInitializer extends Application {
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+public class ServerInitializer{
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Views/ClientForm.fxml"))));
-        primaryStage.show();
+    private static ArrayList<ClientController> clients = new ArrayList<ClientController>();
+
+    public static void main(String[] args) throws IOException {
+        ServerSocket serverSocket;
+        Socket socket;
+        try {
+            serverSocket = new ServerSocket(8889);
+            while(true) {
+                System.out.println("Waiting for clients...");
+                socket = serverSocket.accept();
+                System.out.println("Connected");
+                ClientController clientThread = new ClientController(socket, clients);
+                clients.add(clientThread);
+                clientThread.start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

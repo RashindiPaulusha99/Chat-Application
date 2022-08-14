@@ -1,10 +1,9 @@
 package Controllers;
 
 import Models.Users;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,9 +16,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class ClientFormController {
+public class ClientFormController extends Thread implements Initializable {
     public AnchorPane clientContext;
     public Label lblName;
     public TextField txtType;
@@ -32,14 +33,15 @@ public class ClientFormController {
 
     BufferedReader reader;
     PrintWriter writer;
-    Socket socket;
+    Socket socket=null;
 
    public void setData(String name) throws SQLException, ClassNotFoundException {
        Users users = new RegisterServices().searchByUserName(name);
        lblName.setText(users.getName());
    }
 
-    public void initialize() throws IOException {
+   @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
         cmbInfo.getItems().addAll(
                 "Profile",
@@ -52,6 +54,9 @@ public class ClientFormController {
                     Stage window = (Stage) clientContext.getScene().getWindow();
                     try {
                         window.setScene(new Scene( FXMLLoader.load(getClass().getResource("../Views/LoginForm.fxml"))));
+                        reader.close();
+                        writer.close();
+                        socket.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -59,25 +64,19 @@ public class ClientFormController {
             }
         });
 
-        //connectSocket();
-
-        /*new Thread(()->{
-
-            try {
-                socket = new Socket("localhost",5000);
-
-                InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String record = bufferedReader.readLine();
-                System.out.println(record);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-        }).start();*/
+       try {
+           socket = new Socket("localhost", 8889);
+           System.out.println("Socket is connected with server!");
+           reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+           writer = new PrintWriter(socket.getOutputStream(), true);
+           this.start();
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
     }
 
-    /*public void run() {
+    @Override
+    public void run() {
         try {
             while (true) {
                 String msg = reader.readLine();
@@ -89,12 +88,12 @@ public class ClientFormController {
                     fulmsg.append(tokens[i]);
                 }
                 System.out.println(fulmsg);
-                if (cmd.equalsIgnoreCase(Controller.username + ":")) {
+                if (cmd.equalsIgnoreCase(lblName.getText() + ":")) {
                     continue;
-                } else if(fulmsg.toString().equalsIgnoreCase("bye")) {
+                }else if(fulmsg.toString().equalsIgnoreCase("Logout")) {
                     break;
                 }
-                txtChatArea.appendText(msg + "\n");
+                txtChatArea.appendText(msg + "\n\n");
             }
             reader.close();
             writer.close();
@@ -102,32 +101,17 @@ public class ClientFormController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
-
-   /* public void connectSocket() {
-        try {
-            socket = new Socket("localhost", 8889);
-            System.out.println("Socket is connected with server!");
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            writer = new PrintWriter(socket.getOutputStream(), true);
-            this.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
+    }
 
     public void sendOnAction(ActionEvent event) throws IOException {
-        /*PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
-        printWriter.println(txtType.getText());
-        printWriter.flush();*/
-        /*String msg = txtType.getText();
-        writer.println(Controller.username + ": " + msg);
+        String msg = txtType.getText();
+        writer.println(lblName.getText() + ": " + msg);
         txtChatArea.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        txtChatArea.appendText("Me: " + msg + "\n");
+        txtChatArea.appendText("Me: " + msg + "\n\n");
         txtType.setText("");
-        if(msg.equalsIgnoreCase("BYE") || (msg.equalsIgnoreCase("logout"))) {
+        if(msg.equalsIgnoreCase("logout")) {
             System.exit(0);
-        }*/
+        }
     }
 
     public void stickerOnAction(ActionEvent event) {
