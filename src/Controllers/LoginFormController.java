@@ -31,6 +31,7 @@ public class LoginFormController {
             ClientFormController controller=loader.<ClientFormController>getController();
             controller.setData(txtUsername.getText());
             Stage window = (Stage) loginContext.getScene().getWindow();
+            window.setTitle("Chat Room");
             window.setScene(new Scene(load));
         }
     }

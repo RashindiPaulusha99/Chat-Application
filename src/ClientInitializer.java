@@ -13,7 +13,7 @@ public class ClientInitializer extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Views/LoginForm.fxml"))));
-        primaryStage.setTitle("Play Tech Chat");
+        primaryStage.setTitle("Play Tech Live Chat");
         primaryStage.show();
     }
 }

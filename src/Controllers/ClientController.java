@@ -36,6 +36,7 @@ public class ClientController extends Thread{
                 for (ClientController cl : clients) {
                     cl.writer.println(msg);
                 }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,6 +50,5 @@ public class ClientController extends Thread{
                 e.printStackTrace();
             }
         }
-
     }
 }
