@@ -10,8 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -20,6 +25,8 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -38,8 +45,7 @@ public class ClientFormController extends Thread implements Initializable {
     PrintWriter writer;
     Socket socket=null;
 
-    private FileChooser fileChooser;
-    private File filePath;
+    private File file;
 
    public void setData(String name) {
        lblName.setText(name);
@@ -64,7 +70,7 @@ public class ClientFormController extends Thread implements Initializable {
                 }
             }
         });
-
+     
        try {
            socket = new Socket("localhost", 8889);
            System.out.println("Socket is connected with server!");
@@ -117,36 +123,11 @@ public class ClientFormController extends Thread implements Initializable {
         }
     }
 
-    public boolean saveControl = false;
-
     public void stickerOnAction(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Image");
-        this.filePath = fileChooser.showOpenDialog(stage);
-        saveControl = true;
-
-        saveImage();
-    }
-
-    public void saveImage() {
-        if (saveControl) {
-
-            try {
-                BufferedImage bufferedImage = ImageIO.read(filePath);
-                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                ImageView imageView = new ImageView();
-                imageView.setImage(image);
-                imageView.setFitHeight(30);
-                imageView.setFitWidth(30);
-                saveControl = false;
-                writer.println(lblName.getText() + ": " + imageView.getImage());
-                txtChatArea.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-                txtChatArea.appendText("Me: " + imageView.getImage() + "\n\n");
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-        }
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
+        file = fileChooser.showOpenDialog(stage);
     }
 
     public void emojiOnAction(ActionEvent event) {

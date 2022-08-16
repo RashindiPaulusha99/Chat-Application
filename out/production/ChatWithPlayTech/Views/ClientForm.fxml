@@ -86,5 +86,6 @@
             <String fx:value="content" />
             <String fx:value="text-area" />
          </styleClass></TextArea>
+      <AnchorPane fx:id="emojiList" layoutX="3.0" layoutY="602.0" prefHeight="132.0" prefWidth="395.0" />
    </children>
 </AnchorPane>
