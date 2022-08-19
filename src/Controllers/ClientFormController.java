@@ -1,10 +1,12 @@
 package Controllers;
 
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -97,12 +99,40 @@ public class ClientFormController extends Thread implements Initializable {
                     fulmsg.append(tokens[i]);
                 }
                 System.out.println(fulmsg);
-                if (cmd.equalsIgnoreCase(lblName.getText() + ":")) {
+                if (cmd.equalsIgnoreCase(lblName.getText() + " :  ")) {
                     continue;
                 }else if(fulmsg.toString().equalsIgnoreCase("Bye")) {
                     break;
                 }
-                txtChatArea.appendText(msg + "\n\n");
+
+                /*if (file != null){
+                    BufferedImage bufferedImage = null;
+                    try {
+                        bufferedImage = ImageIO.read(file);
+                        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                        ImageView imageView = new ImageView(image);
+                        imageView.setFitHeight(100);
+                        imageView.setFitWidth(100);
+                        Text text1 = new Text(lblName.getText()+ " : ");
+                        vbox.getChildren().add(text1);
+                        VBox vBox = new VBox();
+                        vBox.getChildren().add(imageView);
+                        vbox.getChildren().add(vBox);
+
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                }*/
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Text text = new Text(msg + "\n\n");
+                        vbox.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                        HBox box = new HBox(text);
+                        vbox.getChildren().add(box);
+                    }
+                });
             }
             reader.close();
             writer.close();
@@ -114,40 +144,46 @@ public class ClientFormController extends Thread implements Initializable {
 
     public void sendOnAction(ActionEvent event) throws IOException {
         String msg = txtType.getText();
-
-        writer.println(lblName.getText() + ": " + msg);
+        /*writer.println(lblName.getText() + ": " + msg);
         txtChatArea.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
         txtChatArea.appendText("Me: " + msg + "\n\n");
         txtType.setText("");
         if(msg.equalsIgnoreCase("Bye") || msg.equalsIgnoreCase("Exit")) {
             System.exit(0);
-        }
-       /* vbox.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        Text text = new Text("Me" + msg);
+        }*/
+
+        vbox.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+        Text text = new Text("Me : " + msg + "\n\n");
+        Text text1 = new Text(msg);
         vbox.getChildren().add(text);
-        writer.println(lblName.getText() + ": " + vbox.getChildren().add(text));*/
+        writer.println(lblName.getText() + ": " + text1.getText());
+
+        txtType.setText("");
+        if(msg.equalsIgnoreCase("Bye") || msg.equalsIgnoreCase("Exit")) {
+            System.exit(0);
+        }
+        //writer.flush();
     }
 
-    public void stickerOnAction(ActionEvent event) {
+    public void stickerOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
         file = fileChooser.showOpenDialog(stage);
 
-        Label label = new Label();
-        Image image = new Image("assets/image/723d0af616b1fe7d5c7e56a3532be3cd.png");
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(80);
-        imageView.setPreserveRatio(true);
-        label.setGraphic(imageView);
+        if (file != null){
+            BufferedImage bufferedImage = ImageIO.read(file);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(100);
+            imageView.setFitWidth(100);
+            vbox.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+            Text text = new Text("Me : ");
+            vbox.getChildren().add(text);
+            vbox.getChildren().add(imageView);
 
-        vbox.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        Text text = new Text("Me");
-        vbox.getChildren().add(text);
-        vbox.getChildren().add(imageView);
-
-        writer.println(lblName.getText() + ": "+vbox.getChildren().add(text) );
-
+            writer.println(lblName.getText() + " : " + file.toURI().toURL());
+        }
     }
 
     public void emojiOnAction(ActionEvent event) {

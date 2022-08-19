@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,6 +13,7 @@ public class ClientController extends Thread{
     private ArrayList<ClientController> clients;
     private Socket socket;
     private BufferedReader reader;
+    private BufferedImage image;
     private PrintWriter writer;
 
     public ClientController(Socket socket, ArrayList<ClientController> clients) {
@@ -33,6 +35,7 @@ public class ClientController extends Thread{
                 if (msg.equalsIgnoreCase( "exit")) {
                     break;
                 }
+
                 for (ClientController cl : clients) {
                     cl.writer.println(msg);
                 }
