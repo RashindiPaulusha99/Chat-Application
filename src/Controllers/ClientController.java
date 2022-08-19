@@ -37,7 +37,9 @@ public class ClientController extends Thread{
                 }
 
                 for (ClientController cl : clients) {
-                    cl.writer.println(msg);
+                    if (socket.getPort() != cl.socket.getPort()){
+                        cl.writer.println(msg);
+                    }
                 }
 
             }
