@@ -40,6 +40,7 @@ public class ClientFormController extends Thread implements Initializable {
     public Button btnEmoji;
     public ImageView imgProfile;
     public ComboBox<String> cmbInfo;
+    public VBox vbox;
 
     BufferedReader reader;
     PrintWriter writer;
@@ -121,6 +122,10 @@ public class ClientFormController extends Thread implements Initializable {
         if(msg.equalsIgnoreCase("Bye") || msg.equalsIgnoreCase("Exit")) {
             System.exit(0);
         }
+       /* vbox.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+        Text text = new Text("Me" + msg);
+        vbox.getChildren().add(text);
+        writer.println(lblName.getText() + ": " + vbox.getChildren().add(text));*/
     }
 
     public void stickerOnAction(ActionEvent event) {
@@ -128,9 +133,26 @@ public class ClientFormController extends Thread implements Initializable {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
         file = fileChooser.showOpenDialog(stage);
+
+        Label label = new Label();
+        Image image = new Image("assets/image/723d0af616b1fe7d5c7e56a3532be3cd.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(80);
+        imageView.setPreserveRatio(true);
+        label.setGraphic(imageView);
+
+        vbox.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+        Text text = new Text("Me");
+        vbox.getChildren().add(text);
+        vbox.getChildren().add(imageView);
+
+        writer.println(lblName.getText() + ": "+vbox.getChildren().add(text) );
+
     }
 
     public void emojiOnAction(ActionEvent event) {
-
+        byte[] emojiByteCode = new byte[]{(byte)0xF0, (byte)0x9F, (byte)0x98, (byte)0x81};
+        String emoji = new String(emojiByteCode, Charset.forName("UTF-8"));
+        txtType.setText(txtType.getText() + " "+ emoji);
     }
 }
