@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -103,25 +104,6 @@ public class ClientFormController extends Thread implements Initializable {
                     break;
                 }
 
-                /*if (file != null){
-                    BufferedImage bufferedImage = null;
-                    try {
-                        bufferedImage = ImageIO.read(file);
-                        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                        ImageView imageView = new ImageView(image);
-                        imageView.setFitHeight(100);
-                        imageView.setFitWidth(100);
-                        Text text1 = new Text(lblName.getText()+ " : ");
-                        vbox.getChildren().add(text1);
-                        VBox vBox = new VBox();
-                        vBox.getChildren().add(imageView);
-                        vbox.getChildren().add(vBox);
-
-                    } catch (IOException exception) {
-                        exception.printStackTrace();
-                    }
-                }*/
-
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -133,13 +115,17 @@ public class ClientFormController extends Thread implements Initializable {
                             imageView.setFitHeight(100);
                             imageView.setFitWidth(100);
                             Text text = new Text(lblName.getText() + " : ");
-                            vbox.getChildren().add(text);
+                            box.setAlignment(Pos.TOP_LEFT);
+                            box.getChildren().add(text);
+                            vbox.getChildren().add(box);
                             vbox.getChildren().add(imageView);
                         }else {
                             Text text = new Text(msg + "\n");
                             TextFlow textFlow = new TextFlow(text);
+                            textFlow.setStyle("-fx-background-color: darkturquoise; -fx-text-fill: white; -fx-background-radius: 20px;-fx-font-size: 20px; -fx-border-color: darkslateblue;-fx-border-radius: 20px;-fx-border-width: 2px;-fx-text-alignment: center");
+                            box.setAlignment(Pos.CENTER_LEFT);
                             box.getChildren().add(textFlow);
-                            vbox.getChildren().add(text);
+                            vbox.getChildren().add(box);
                         }
                     }
                 });
@@ -156,22 +142,16 @@ public class ClientFormController extends Thread implements Initializable {
     public void sendOnAction(ActionEvent event) throws IOException {
         String msg = txtType.getText();
 
-        /*writer.println(lblName.getText() + ": " + msg);
-        txtChatArea.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        txtChatArea.appendText("Me: " + msg + "\n\n");
-        txtType.setText("");
-        if(msg.equalsIgnoreCase("Bye") || msg.equalsIgnoreCase("Exit")) {
-            System.exit(0);
-        }
-*/
         writer.println(lblName.getText() + ": " + msg);
         writer.flush();
-        vbox.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
         Text text = new Text("Me : " + msg + "\n");
         HBox box = new HBox();
-        box.getChildren().add(text);
+        box.setAlignment(Pos.CENTER_RIGHT);
+        TextFlow textFlow = new TextFlow(text);
+        textFlow.setStyle("-fx-background-color: cornflowerblue; -fx-text-fill: white; -fx-background-radius: 20px;-fx-font-size: 20px; -fx-border-color: darkslateblue;-fx-border-radius: 20px;-fx-border-width: 2px;-fx-text-alignment: center");
+        box.getChildren().add(textFlow);
+        vbox.setAlignment(Pos.TOP_LEFT);
         vbox.getChildren().add(box);
-
         txtType.setText("");
         if(msg.equalsIgnoreCase("Bye") || msg.equalsIgnoreCase("Exit")) {
             System.exit(0);
@@ -196,6 +176,7 @@ public class ClientFormController extends Thread implements Initializable {
             vbox.getChildren().add(imageView);
 
             writer.println(lblName.getText() + " : " + file.toURI().toURL());
+            writer.flush();
         }
     }
 
