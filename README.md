@@ -1,5 +1,5 @@
 # *About*
-This is my Internet Network Technology Project of **Live Chat Application**.
+This is my Network Programming Project of **Live Chat Application**.
 
 ![Image of Book](src/assets/image/Screenshot_2022-09-06_125858-removebg-preview.png)
 
