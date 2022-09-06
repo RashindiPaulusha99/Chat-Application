@@ -1,5 +1,5 @@
 # *About*
-This is my Network Programming Project of **Live Chat Application**.
+This is my Internet Network Technology Project of **Live Chat Application**.
 
 ![Image of Book](src/assets/image/Screenshot_2022-09-06_125858-removebg-preview.png)
 
@@ -23,7 +23,7 @@ This chat room is supposed to be used by employees of the customer service divis
 
 # *Details*
 
-Below you can see the languages,tools I used and function of the project.
+Below you can see the languages,tools I used to the project.
 
 ## Languages
 
