@@ -25,7 +25,7 @@ This chat room is supposed to be used by employees of the customer service divis
 
 Below you can see the languages, architectures, tools I used  the project.
 
-##architectures
+## Architectures
 * MVC  
 * Client-Server 
 
