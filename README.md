@@ -31,7 +31,6 @@ Below you can see the languages,tools I used and function of the project.
 * JavaFX 
 * Socket Programming 
 
-
 ## Tools
 * Intellij IDE
 
