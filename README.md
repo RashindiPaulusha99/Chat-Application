@@ -23,7 +23,7 @@ This chat room is supposed to be used by employees of the customer service divis
 
 # *Details*
 
-Below you can see the languages,tools I used to the project.
+Below you can see the languages,tools I used and function of the project.
 
 ## Languages
 
@@ -32,5 +32,5 @@ Below you can see the languages,tools I used to the project.
 * Socket Programming 
 
 ## Tools
-* Intellij IDE
+#### Intellij IDE
 
