@@ -36,5 +36,5 @@ Below you can see the languages, architectures, tools I used  the project.
 * Socket Programming 
 
 ## Tools
-#### Intellij IDE
+#### IntelliJ IDEA
 
