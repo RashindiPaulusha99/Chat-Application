@@ -38,5 +38,5 @@ Below you can see the languages, architectures, tools I used  the project.
 
 ## Tools
 * IntelliJ IDEA
-* Scene Buider
+* Scene Bulider
 
